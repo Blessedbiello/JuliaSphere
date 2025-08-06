@@ -1,44 +1,31 @@
 using LibPQ, JSON3, SQLStrings
 using ..Agents: trigger_type_to_string, agent_state_to_string, Agent, AgentState
 
-function insert_agent(
-    agent::Agent,
-)
-    conn = get_connection()
-
-    LibPQ.execute(conn, "BEGIN")
-    try
+function insert_agent(agent::Agent)
+    with_transaction() do conn
         _insert_agent_proper(agent, conn)
         _insert_agent_tools(agent, conn)
-
-        LibPQ.execute(conn, "COMMIT")
-    catch e
-        LibPQ.execute(conn, "ROLLBACK")
-        rethrow(e)
     end
 end
 
 
-function delete_agent(
-    agent_id::String,
-)
-    conn = get_connection()
-    query = SQLStrings.sql`
-        DELETE FROM agents WHERE id = $agent_id
-    `
-    LibPQ.execute(conn, query)
+function delete_agent(agent_id::String)
+    with_connection() do conn
+        query = SQLStrings.sql`
+            DELETE FROM agents WHERE id = $agent_id
+        `
+        LibPQ.execute(conn, query)
+    end
 end
 
-function update_agent_state(
-    agent_id::String,
-    new_state::AgentState,
-)
-    conn = get_connection()
-    new_state_str = agent_state_to_string(new_state)
-    query = SQLStrings.sql`
-        UPDATE agents SET state = $new_state_str WHERE id = $agent_id
-    `
-    LibPQ.execute(conn, query)
+function update_agent_state(agent_id::String, new_state::AgentState)
+    with_connection() do conn
+        new_state_str = agent_state_to_string(new_state)
+        query = SQLStrings.sql`
+            UPDATE agents SET state = $new_state_str WHERE id = $agent_id
+        `
+        LibPQ.execute(conn, query)
+    end
 end
 
 

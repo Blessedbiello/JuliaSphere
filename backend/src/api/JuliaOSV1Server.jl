@@ -7,10 +7,15 @@ include("server/src/JuliaOSServer.jl")
 include("utils.jl")
 include("openapi_server_extensions.jl")
 include("validation.jl")
+include("auth.jl")
+include("error_handling.jl")
 
 using .JuliaOSServer
+using .Auth
+using .ErrorHandling
 using ..JuliaDB
 using ..Agents: Agents, Triggers
+using ..MarketplaceAPI
 using ...Resources: Errors
 
 const server = Ref{Any}(nothing)
@@ -79,16 +84,23 @@ end
 
 function get_agent(req::HTTP.Request, agent_id::String;)::HTTP.Response
     @info "Triggered endpoint: GET /agents/$(agent_id)"
-    agent = get(Agents.AGENTS, agent_id) do
-        @warn "Attempt to get non-existent agent: $(agent_id)"
-        return nothing
-    end
-    if agent == nothing
-        return HTTP.Response(404, "Agent not found")
-    end
+    
+    try
+        agent = get(Agents.AGENTS, agent_id) do
+            @warn "Attempt to get non-existent agent: $(agent_id)"
+            return nothing
+        end
+        
+        if agent == nothing
+            return ErrorHandling.not_found_error("Agent", agent_id; 
+                request_id=get(req.context, "request_id", nothing))
+        end
 
-    agent_summary = summarize(agent)
-    return HTTP.Response(200, agent_summary)
+        agent_summary = summarize(agent)
+        return ErrorHandling.success_response(agent_summary)
+    catch e
+        return ErrorHandling.handle_exception(e, get(req.context, "request_id", "unknown"))
+    end
 end
 
 function list_agents(req::HTTP.Request;)::Vector{AgentSummary}
@@ -169,9 +181,26 @@ end
 function run_server(host::AbstractString="0.0.0.0", port::Integer=8052)
     try
         router = HTTP.Router()
-        router = JuliaOSServer.register(router, @__MODULE__; path_prefix="/api/v1")
-        HTTP.register!(router, "GET", "/ping", ping)
-        server[] = HTTP.serve!(router, host, port)
+        
+        # Add error handling middleware to all routes
+        wrapped_router = HTTP.Router()
+        
+        # Register core routes with middleware
+        core_router = JuliaOSServer.register(HTTP.Router(), @__MODULE__; path_prefix="/api/v1")
+        for (method, path, handler) in core_router.routes
+            wrapped_handler = ErrorHandling.error_handler_middleware(Auth.authenticate_request(handler))
+            HTTP.register!(wrapped_router, method, path, wrapped_handler)
+        end
+        
+        # Register basic routes
+        wrapped_ping = ErrorHandling.error_handler_middleware(ping)
+        HTTP.register!(wrapped_router, "GET", "/ping", wrapped_ping)
+        
+        # Register marketplace routes with middleware  
+        MarketplaceAPI.register_routes!(wrapped_router; path_prefix="/api/v1")
+        
+        @info "Starting JuliaOS server with marketplace functionality on $host:$port"
+        server[] = HTTP.serve!(wrapped_router, host, port)
         wait(server[])
     catch ex
         @error("Server error", exception=(ex, catch_backtrace()))
