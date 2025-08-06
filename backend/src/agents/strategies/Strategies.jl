@@ -9,6 +9,9 @@ include("telegram/strategy_moderator.jl")
 include("telegram/strategy_support.jl")
 include("strategy_ai_news_scraping.jl")
 
+# Community-contributed investigation strategies
+include("community/investigation/strategy_juliaxbt_investigation.jl")
+
 using ..CommonTypes: StrategySpecification
 
 const STRATEGY_REGISTRY = Dict{String, StrategySpecification}()
@@ -29,5 +32,8 @@ register_strategy(STRATEGY_BLOG_WRITER_SPECIFICATION)
 register_strategy(STRATEGY_TELEGRAM_MODERATOR_SPECIFICATION)
 register_strategy(STRATEGY_TELEGRAM_SUPPORT_SPECIFICATION)
 register_strategy(STRATEGY_AI_NEWS_SCRAPING_SPECIFICATION)
+
+# Register community investigation strategies
+register_strategy(STRATEGY_JULIAXBT_INVESTIGATION_SPECIFICATION)
 
 end

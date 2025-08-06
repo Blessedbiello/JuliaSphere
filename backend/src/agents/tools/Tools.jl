@@ -13,6 +13,15 @@ include("telegram/tool_send_message.jl")
 include("tool_scrape_article_text.jl")
 include("tool_summarize_for_post.jl")
 
+# Community-contributed blockchain investigation tools
+include("community/blockchain/tool_solana_rpc.jl")
+include("community/blockchain/tool_transaction_tracer.jl")
+include("community/blockchain/tool_mixer_detector.jl")
+
+# Community-contributed social media tools
+include("community/social_media/tool_twitter_research.jl")
+include("community/social_media/tool_thread_generator.jl")
+
 using ..CommonTypes: ToolSpecification
 
 const TOOL_REGISTRY = Dict{String, ToolSpecification}()
@@ -37,5 +46,14 @@ register_tool(TOOL_DETECT_SWEAR_SPECIFICATION)
 register_tool(TOOL_SEND_MESSAGE_SPECIFICATION)
 register_tool(TOOL_SCRAPE_ARTICLE_TEXT_SPECIFICATION)
 register_tool(TOOL_SUMMARIZE_FOR_POST_SPECIFICATION)
+
+# Register community blockchain investigation tools
+register_tool(TOOL_SOLANA_RPC_SPECIFICATION)
+register_tool(TOOL_TRANSACTION_TRACER_SPECIFICATION)  
+register_tool(TOOL_MIXER_DETECTOR_SPECIFICATION)
+
+# Register community social media tools
+register_tool(TOOL_TWITTER_RESEARCH_SPECIFICATION)
+register_tool(TOOL_THREAD_GENERATOR_SPECIFICATION)
 
 end

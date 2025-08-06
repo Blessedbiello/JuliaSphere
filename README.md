@@ -1,8 +1,8 @@
-# JuliaSphere: Decentralized AI Agent Marketplace 🤖
+# JuliaSphere: Decentralized AI Agent Ecosystem 🤖
 
 *joo-LEE-uh-sphere* /ˈdʒuː.li.ə.sfɪr/
 
-**JuliaSphere is a next-generation decentralized application (dApp) that creates a comprehensive marketplace and execution environment for AI agents, enabling developers to build, deploy, monetize, and coordinate intelligent autonomous systems.**
+**JuliaSphere is a comprehensive decentralized ecosystem featuring two powerful dApps: a next-generation AI agent marketplace and juliaXBT, an autonomous blockchain investigation agent. Together, they enable developers to build, deploy, monetize, and coordinate intelligent autonomous systems while providing specialized blockchain forensics capabilities.**
 
 Translations:
 [🇨🇳 汉语](/docs/translations/汉语.md) | [🇦🇪 اَلْعَرَبِيَّةُ](/docs/translations/اَلْعَرَبِيَّةُ.md) | [🇩🇪 Deutschland](/docs/translations/Deutschland.md)| [🇫🇷 Français](/docs/translations/Français.md) | [🇮🇹 Italiano](/docs/translations/Italiano.md) | [🇪🇸 Español](/docs/translations/Español.md)
@@ -11,18 +11,28 @@ Translations:
 
 ## 🚀 Executive Summary
 
-JuliaSphere transforms how AI agents are created, deployed, and coordinated by providing:
+JuliaSphere transforms how AI agents are created, deployed, and coordinated by providing two complementary dApps:
 
-### 🎯 **Core dApp Value Proposition**
+### 🎯 **Core dApp Ecosystem**
+
+#### 🏪 **JuliaSphere Marketplace dApp**
 - **AI Agent Marketplace**: Buy, sell, and deploy production-ready AI agents
 - **High-Performance Runtime**: Julia-powered execution engine for optimal agent performance  
 - **Swarm Intelligence**: Automatic multi-agent coordination and optimization
 - **Enterprise Security**: Production-grade authentication, authorization, and audit trails
 - **Developer-First**: Complete SDK, tools, and documentation for rapid development
 
+#### 🔍 **juliaXBT Investigation dApp**
+- **Autonomous Blockchain Forensics**: AI-powered investigation of suspicious transactions and wallet activities
+- **Social Media Intelligence**: Automated collection and analysis of social signals related to crypto actors
+- **Real-time Monitoring**: Continuous surveillance of blockchain transactions and mixer usage patterns
+- **Investigation Reports**: Automated generation of comprehensive investigation reports with evidence compilation
+- **Community Integration**: Direct publishing capabilities to social media platforms for transparency
+
 ### 💡 **Primary Use Cases**
 
-1. **🏪 Marketplace Trading**
+#### 🏪 **Marketplace dApp Use Cases**
+1. **Agent Trading**
    - Developers publish and monetize AI agents with flexible pricing (free, subscription, pay-per-use)
    - Users discover and deploy specialized agents for specific tasks
    - Rating and review system ensures quality and trust
@@ -42,6 +52,91 @@ JuliaSphere transforms how AI agents are created, deployed, and coordinated by p
    - Scalable agent infrastructure with high availability
    - Comprehensive compliance and audit capabilities
    - Custom deployment options and white-labeling
+
+#### 🔍 **juliaXBT Investigation dApp Use Cases**
+1. **🕵️ Blockchain Forensics**
+   - Automated investigation of suspicious wallet addresses
+   - Transaction pattern analysis and anomaly detection
+   - Mixer and privacy coin usage tracking
+   - Cross-chain transaction following and analysis
+
+2. **📊 Social Intelligence Gathering**
+   - Social media profile analysis and connection mapping
+   - Automated collection of public statements and associations
+   - Timeline reconstruction of public activities
+   - Community sentiment and reaction analysis
+
+3. **📝 Investigation Documentation**
+   - Automated generation of comprehensive investigation reports
+   - Evidence compilation and organization
+   - Timeline creation with supporting documentation
+   - Multi-format export capabilities (PDF, JSON, HTML)
+
+4. **🚨 Real-time Monitoring**
+   - Continuous surveillance of target addresses
+   - Alert generation for suspicious activities
+   - Integration with community warning systems
+   - Automated social media reporting for transparency
+
+## 🔍 juliaXBT: Autonomous Blockchain Investigation dApp
+
+juliaXBT is a specialized AI agent that provides autonomous blockchain forensics and investigation capabilities, inspired by the investigative methods of prominent blockchain analysts. This dApp operates as an intelligent investigation system that can analyze blockchain transactions, gather social intelligence, and generate comprehensive reports.
+
+### 🎯 **Core Capabilities**
+
+#### 🔗 **Blockchain Analysis Engine**
+- **Transaction Tracing**: Follow complex transaction paths across multiple addresses and exchanges
+- **Pattern Recognition**: Identify suspicious behavioral patterns and anomalies in transaction data
+- **Mixer Detection**: Automatically detect usage of mixing services and privacy-enhancing tools
+- **Cross-Chain Analysis**: Track assets across different blockchain networks
+- **Address Clustering**: Group related addresses based on behavioral and transactional patterns
+
+#### 🧠 **AI-Powered Intelligence**
+- **Social Media Monitoring**: Automated collection and analysis of social media activity
+- **Profile Analysis**: Deep analysis of social media profiles and their connections
+- **Sentiment Analysis**: Evaluate community sentiment and reactions to specific actors
+- **Timeline Reconstruction**: Create chronological timelines of activities and events
+- **Evidence Correlation**: Automatically correlate blockchain data with social intelligence
+
+#### 📊 **Investigation Tools**
+- **Real-time Alerts**: Configurable monitoring and alerting for suspicious activities
+- **Report Generation**: Automated creation of professional investigation reports
+- **Data Visualization**: Interactive charts and graphs for transaction flow analysis
+- **Export Capabilities**: Multiple format support (PDF, JSON, HTML, CSV)
+- **Collaboration Features**: Share findings and collaborate with other investigators
+
+### 🚀 **How juliaXBT Works**
+
+1. **🎯 Target Identification**: Specify wallet addresses, entities, or transactions to investigate
+2. **📈 Data Collection**: Automatically gather blockchain transaction data and social media intelligence
+3. **🔍 Analysis Phase**: Apply AI algorithms to identify patterns, anomalies, and connections
+4. **📝 Report Generation**: Create comprehensive investigation reports with evidence and analysis
+5. **📢 Community Integration**: Option to publish findings to social media platforms for transparency
+
+### 🛠️ **Technical Features**
+
+- **Multi-Chain Support**: Ethereum, Bitcoin, Polygon, BSC, and other major blockchain networks
+- **API Integration**: Connects with major blockchain explorers and social media platforms
+- **Machine Learning**: Advanced pattern recognition and anomaly detection algorithms
+- **Real-time Processing**: Continuous monitoring and analysis capabilities
+- **Scalable Architecture**: Built on the JuliaSphere platform for high performance
+
+### 📋 **Getting Started with juliaXBT**
+
+To use the juliaXBT investigation agent:
+
+```bash
+# Navigate to backend directory
+cd backend
+
+# Run the investigation demo
+julia --project=. investigation_demo.jl
+
+# Or run the test system
+julia --project=. test_investigation_system.jl
+```
+
+The agent can be configured through environment variables in `backend/.env.investigation.example`.
 
 ## 🏗️ dApp Architecture Overview
 
