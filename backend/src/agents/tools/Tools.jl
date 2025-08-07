@@ -22,6 +22,16 @@ include("community/blockchain/tool_mixer_detector.jl")
 include("community/social_media/tool_twitter_research.jl")
 include("community/social_media/tool_thread_generator.jl")
 
+# JuliaSphere marketplace management tools
+include("marketplace/tool_marketplace_curator.jl")
+include("marketplace/tool_agent_recommender.jl")
+include("marketplace/tool_marketplace_optimizer.jl")
+
+# JuliaSphere community management tools
+include("community/tool_community_moderator.jl")
+include("community/tool_market_analyst.jl")
+include("community/tool_user_onboarding.jl")
+
 using ..CommonTypes: ToolSpecification
 
 const TOOL_REGISTRY = Dict{String, ToolSpecification}()
@@ -55,5 +65,15 @@ register_tool(TOOL_MIXER_DETECTOR_SPECIFICATION)
 # Register community social media tools
 register_tool(TOOL_TWITTER_RESEARCH_SPECIFICATION)
 register_tool(TOOL_THREAD_GENERATOR_SPECIFICATION)
+
+# Register JuliaSphere marketplace management tools
+register_tool(TOOL_MARKETPLACE_CURATOR_SPECIFICATION)
+register_tool(TOOL_AGENT_RECOMMENDER_SPECIFICATION)
+register_tool(TOOL_MARKETPLACE_OPTIMIZER_SPECIFICATION)
+
+# Register JuliaSphere community management tools
+register_tool(TOOL_COMMUNITY_MODERATOR_SPECIFICATION)
+register_tool(TOOL_MARKET_ANALYST_SPECIFICATION)
+register_tool(TOOL_USER_ONBOARDING_SPECIFICATION)
 
 end
