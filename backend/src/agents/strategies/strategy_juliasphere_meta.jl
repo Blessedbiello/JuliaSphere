@@ -182,7 +182,7 @@ function perform_marketplace_management(ctx::AgentContext, meta_state::Dict)
     actions = []
     
     # Agent curation and quality control
-    curator_tool = find_tool(ctx, "marketplace_curator")
+    curator_tool = find_meta_tool(ctx, "marketplace_curator")
     if curator_tool !== nothing
         push!(ctx.logs, "🔍 Running agent curation...")
         curation_result = curator_tool.execute(curator_tool.config, Dict("operation" => "daily_review"))
@@ -192,7 +192,7 @@ function perform_marketplace_management(ctx::AgentContext, meta_state::Dict)
     end
     
     # Performance monitoring and optimization
-    optimizer_tool = find_tool(ctx, "marketplace_optimizer")
+    optimizer_tool = find_meta_tool(ctx, "marketplace_optimizer")
     if optimizer_tool !== nothing
         push!(ctx.logs, "⚡ Optimizing marketplace performance...")
         optimization_result = optimizer_tool.execute(optimizer_tool.config, Dict("operation" => "performance_optimization"))
@@ -200,7 +200,7 @@ function perform_marketplace_management(ctx::AgentContext, meta_state::Dict)
     end
     
     # User experience enhancement
-    recommender_tool = find_tool(ctx, "agent_recommender")
+    recommender_tool = find_meta_tool(ctx, "agent_recommender")
     if recommender_tool !== nothing
         push!(ctx.logs, "💡 Updating agent recommendations...")
         recommendation_result = recommender_tool.execute(recommender_tool.config, Dict("operation" => "update_recommendations"))
@@ -214,7 +214,7 @@ function perform_swarm_coordination(ctx::AgentContext, meta_state::Dict)
     actions = []
     
     # Swarm optimization
-    swarm_tool = find_tool(ctx, "swarm_optimizer")
+    swarm_tool = find_meta_tool(ctx, "swarm_optimizer")
     if swarm_tool !== nothing
         push!(ctx.logs, "🐝 Coordinating agent swarms...")
         swarm_result = swarm_tool.execute(swarm_tool.config, Dict(
@@ -235,7 +235,7 @@ function perform_community_engagement(ctx::AgentContext, meta_state::Dict)
     actions = []
     
     # Community moderation
-    moderator_tool = find_tool(ctx, "community_moderator")
+    moderator_tool = find_meta_tool(ctx, "community_moderator")
     if moderator_tool !== nothing
         push!(ctx.logs, "🛡️ Moderating community interactions...")
         moderation_result = moderator_tool.execute(moderator_tool.config, Dict("operation" => "daily_moderation"))
@@ -243,7 +243,7 @@ function perform_community_engagement(ctx::AgentContext, meta_state::Dict)
     end
     
     # User onboarding assistance
-    onboarding_tool = find_tool(ctx, "user_onboarding")
+    onboarding_tool = find_meta_tool(ctx, "user_onboarding")
     if onboarding_tool !== nothing
         push!(ctx.logs, "🎓 Assisting new user onboarding...")
         onboarding_result = onboarding_tool.execute(onboarding_tool.config, Dict("operation" => "assist_new_users"))
@@ -251,7 +251,7 @@ function perform_community_engagement(ctx::AgentContext, meta_state::Dict)
     end
     
     # Market trend analysis and community updates
-    analyst_tool = find_tool(ctx, "market_analyst")
+    analyst_tool = find_meta_tool(ctx, "market_analyst")
     if analyst_tool !== nothing
         push!(ctx.logs, "📈 Analyzing market trends...")
         analysis_result = analyst_tool.execute(analyst_tool.config, Dict("operation" => "trend_analysis"))
@@ -313,7 +313,7 @@ agent.useLLM() API pattern implementation for bounty compliance
 Provides intelligent decision-making capabilities to the meta-agent
 """
 function agent_use_llm(ctx::AgentContext, params::Dict)
-    llm_tool = find_tool(ctx, "llm_chat")
+    llm_tool = find_meta_tool(ctx, "llm_chat")
     if llm_tool === nothing
         return Dict("success" => false, "error" => "LLM tool not available")
     end
@@ -391,7 +391,7 @@ end
 # UTILITY FUNCTIONS
 # ============================================================================
 
-function find_tool(ctx::AgentContext, tool_name::String)
+function find_meta_tool(ctx::AgentContext, tool_name::String)
     index = findfirst(tool -> tool.metadata.name == tool_name, ctx.tools)
     return index !== nothing ? ctx.tools[index] : nothing
 end

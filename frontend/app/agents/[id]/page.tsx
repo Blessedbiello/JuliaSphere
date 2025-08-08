@@ -98,7 +98,8 @@ export default function AgentDetailsPage() {
       ])
 
       if (agentResponse.status === 'fulfilled') {
-        setAgent(agentResponse.value.data)
+        // Backend returns data nested in a data object
+        setAgent(agentResponse.value.data.data || agentResponse.value.data)
       } else {
         throw new Error('Failed to load agent details')
       }
@@ -188,8 +189,8 @@ export default function AgentDetailsPage() {
           <div className="flex items-center gap-3">
             <Bot className="h-6 w-6 text-blue-600" />
             <h1 className="text-2xl font-bold text-gray-900">{agent.name}</h1>
-            <Badge className={stateColors[agent.state]}>
-              {agent.state.toLowerCase()}
+            <Badge className={stateColors[agent.state || 'CREATED']}>
+              {agent.state?.toLowerCase() || 'unknown'}
             </Badge>
           </div>
           <p className="text-gray-600 mt-1">{agent.description}</p>
@@ -332,17 +333,21 @@ export default function AgentDetailsPage() {
               <CardContent className="space-y-4">
                 <div>
                   <label className="text-sm font-medium text-gray-600">Strategy</label>
-                  <p className="font-medium">{agent.blueprint.strategy.name}</p>
+                  <p className="font-medium">{agent.blueprint?.strategy?.name || 'Not available'}</p>
                 </div>
                 <div>
-                  <label className="text-sm font-medium text-gray-600">Tools ({agent.blueprint.tools.length})</label>
+                  <label className="text-sm font-medium text-gray-600">Tools ({agent.blueprint?.tools?.length || 0})</label>
                   <div className="space-y-2">
-                    {agent.blueprint.tools.map((tool, index) => (
-                      <div key={index} className="flex items-center justify-between p-2 bg-gray-50 rounded">
-                        <span className="font-medium">{tool.name}</span>
-                        <Badge variant="secondary">Tool</Badge>
-                      </div>
-                    ))}
+                    {agent.blueprint?.tools?.length > 0 ? (
+                      agent.blueprint.tools.map((tool, index) => (
+                        <div key={index} className="flex items-center justify-between p-2 bg-gray-50 rounded">
+                          <span className="font-medium">{tool.name}</span>
+                          <Badge variant="secondary">Tool</Badge>
+                        </div>
+                      ))
+                    ) : (
+                      <p className="text-gray-500">No tools data available</p>
+                    )}
                   </div>
                 </div>
               </CardContent>
@@ -454,7 +459,7 @@ export default function AgentDetailsPage() {
             </CardHeader>
             <CardContent>
               <pre className="text-sm bg-gray-900 text-gray-100 p-4 rounded overflow-x-auto">
-                {JSON.stringify(agent.blueprint, null, 2)}
+                {JSON.stringify(agent.blueprint || {message: "Blueprint data not available from backend"}, null, 2)}
               </pre>
             </CardContent>
           </Card>

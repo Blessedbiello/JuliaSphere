@@ -5,6 +5,7 @@ using JSON3
 using UUIDs
 using Dates
 using Base64
+using ..JuliaDB
 
 # JWT-like token structure (simplified for demonstration)
 struct UserContext
@@ -134,7 +135,6 @@ function _user_owns_agent(user_id::UUID, agent_id::String)::Bool
     # This would typically query the database
     # For now, we'll implement a simple check
     try
-        using ..JuliaDB
         query = "SELECT creator_id FROM agent_marketplace WHERE agent_id = ?"
         result = JuliaDB.execute_query(query, [agent_id])
         

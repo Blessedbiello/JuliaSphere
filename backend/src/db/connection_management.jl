@@ -307,7 +307,7 @@ function execute_query(query::String, params::Vector{Any}=Any[])
 end
 
 """
-Safely convert ? placeholders to PostgreSQL $1, $2, etc. format
+Safely convert ? placeholders to PostgreSQL \$1, \$2, etc. format
 Returns the converted query and the number of parameters found
 """
 function _convert_placeholders_safely(query::String)::Tuple{String, Int}

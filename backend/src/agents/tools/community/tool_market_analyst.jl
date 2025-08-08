@@ -283,7 +283,7 @@ function assess_overall_market_health(cfg::ToolMarketAnalystConfig, time_period:
             "confidence" => health_analysis["confidence"]
         )
     else
-        return get_basic_health_assessment(health_indicators)
+        return get_market_health_assessment(health_indicators)
     end
 end
 
@@ -719,7 +719,7 @@ function generate_opportunity_recommendations(cfg, opportunities) return ["oppor
 function get_basic_opportunity_analysis(data) return Dict("analysis" => Dict(), "insights" => [], "recommendations" => [], "confidence" => 0.5) end
 function extract_health_insights(analysis) return ["health_insight1", "health_insight2"] end
 function generate_health_recommendations(cfg, analysis) return ["health_rec1", "health_rec2"] end
-function get_basic_health_assessment(indicators) return Dict("analysis" => Dict(), "insights" => [], "recommendations" => [], "confidence" => 0.5) end
+function get_market_health_assessment(indicators) return Dict("analysis" => Dict(), "insights" => [], "recommendations" => [], "confidence" => 0.5) end
 
 const TOOL_MARKET_ANALYST_METADATA = ToolMetadata(
     "market_analyst",
